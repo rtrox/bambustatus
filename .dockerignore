@@ -24,11 +24,9 @@ bambustatus
 .DS_Store
 Thumbs.db
 
-# Documentation
-README.md
-LICENSE
-*.md
-
 # Docker
 Dockerfile
 .dockerignore
+
+# GitHub
+.github
