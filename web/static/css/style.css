@@ -1,0 +1,164 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: transparent;
+    color: #ffffff;
+    overflow: hidden;
+}
+
+.overlay-container {
+    padding: 15px;
+    width: 1744px;
+    max-height: 200px;
+}
+
+.status-panel {
+    background: rgba(0, 0, 0, 0.90);
+    border-radius: 12px;
+    padding: 25px 35px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 170px;
+}
+
+/* Print Info Section - Left Side */
+.print-info {
+    flex: 0 0 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.print-name {
+    font-size: 32px;
+    font-weight: bold;
+    color: #4CAF50;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.progress-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.progress-bar-container {
+    flex: 1;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #4CAF50, #8BC34A);
+    transition: width 0.5s ease;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+}
+
+.progress-text {
+    font-size: 32px;
+    font-weight: bold;
+    color: #4CAF50;
+    min-width: 100px;
+    text-align: right;
+}
+
+.layer-info {
+    font-size: 22px;
+    color: #b0b0b0;
+}
+
+/* Temperatures Section - Middle */
+.temps-container {
+    flex: 0 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    padding: 20px 30px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+}
+
+.temp-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.temp-label {
+    font-size: 16px;
+    color: #b0b0b0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.temp-value {
+    font-size: 30px;
+    font-weight: bold;
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+}
+
+.temp-item.nozzle .temp-current {
+    color: #FF5722;
+}
+
+.temp-item.bed .temp-current {
+    color: #FF9800;
+}
+
+.temp-item.ambient .temp-current {
+    color: #2196F3;
+}
+
+.temp-target {
+    color: #808080;
+    font-size: 20px;
+}
+
+/* Time Info Section - Right Side */
+.time-info {
+    flex: 0 0 auto;
+    display: flex;
+    gap: 40px;
+    justify-content: flex-end;
+    padding-left: 30px;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.time-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.time-label {
+    font-size: 16px;
+    color: #b0b0b0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.time-value {
+    font-size: 30px;
+    font-weight: bold;
+    color: #ffffff;
+}

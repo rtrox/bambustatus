@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Printer Status</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="overlay-container">
+        <div class="status-panel">
+            <div class="print-info">
+                <div class="print-name">{{ .PrintName }}</div>
+                <div class="progress-section">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" style="width: {{ .Progress }}%"></div>
+                    </div>
+                    <div class="progress-text">{{ printf "%.1f" .Progress }}%</div>
+                </div>
+                <div class="layer-info">
+                    Layer {{ .CurrentLayer }} / {{ .TotalLayers }}
+                </div>
+            </div>
+
+            <div class="temps-container">
+                <div class="temp-item nozzle">
+                    <div class="temp-label">Nozzle</div>
+                    <div class="temp-value">
+                        <span class="temp-current">{{ printf "%.1f" .NozzleTemp }}°</span>
+                        <span class="temp-target">/ {{ printf "%.0f" .NozzleTempTarget }}°</span>
+                    </div>
+                </div>
+
+                <div class="temp-item bed">
+                    <div class="temp-label">Bed</div>
+                    <div class="temp-value">
+                        <span class="temp-current">{{ printf "%.1f" .BedTemp }}°</span>
+                        <span class="temp-target">/ {{ printf "%.0f" .BedTempTarget }}°</span>
+                    </div>
+                </div>
+
+                <div class="temp-item ambient">
+                    <div class="temp-label">Ambient</div>
+                    <div class="temp-value">
+                        <span class="temp-current">{{ printf "%.1f" .AmbientTemp }}°</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="time-info">
+                <div class="time-item">
+                    <span class="time-label">Elapsed:</span>
+                    <span class="time-value">{{ .FormatTimeElapsed }}</span>
+                </div>
+                <div class="time-item">
+                    <span class="time-label">Remaining:</span>
+                    <span class="time-value">{{ .FormatTimeRemaining }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/updater.js"></script>
+</body>
+</html>
