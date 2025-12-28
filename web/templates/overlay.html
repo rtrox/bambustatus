@@ -9,52 +9,52 @@
 <body>
     <div class="overlay-container">
         <div class="status-panel">
-            <div class="print-info">
+            <!-- Progress Section - Single Line -->
+            <div class="progress-section">
                 <div class="print-name">{{ .PrintName }}</div>
-                <div class="progress-section">
-                    <div class="progress-bar-container">
-                        <div class="progress-bar" style="width: {{ .Progress }}%"></div>
-                    </div>
-                    <div class="progress-text">{{ printf "%.1f" .Progress }}%</div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="width: {{ .Progress }}%"></div>
+                    <div class="layer-info">Layer {{ .CurrentLayer }} / {{ .TotalLayers }}</div>
                 </div>
-                <div class="layer-info">
-                    Layer {{ .CurrentLayer }} / {{ .TotalLayers }}
-                </div>
+                <div class="progress-text">{{ printf "%.1f" .Progress }}%</div>
             </div>
 
-            <div class="temps-container">
-                <div class="temp-item nozzle">
-                    <div class="temp-label">Nozzle</div>
-                    <div class="temp-value">
-                        <span class="temp-current">{{ printf "%.1f" .NozzleTemp }}°</span>
-                        <span class="temp-target">/ {{ printf "%.0f" .NozzleTempTarget }}°</span>
+            <!-- Details Section - Below Progress -->
+            <div class="details-section">
+                <div class="temps-container">
+                    <div class="temp-item nozzle">
+                        <div class="temp-label">Nozzle</div>
+                        <div class="temp-value">
+                            <span class="temp-current">{{ printf "%.1f" .NozzleTemp }}°</span>
+                            <span class="temp-target">/ {{ printf "%.0f" .NozzleTempTarget }}°</span>
+                        </div>
                     </div>
-                </div>
 
-                <div class="temp-item bed">
-                    <div class="temp-label">Bed</div>
-                    <div class="temp-value">
-                        <span class="temp-current">{{ printf "%.1f" .BedTemp }}°</span>
-                        <span class="temp-target">/ {{ printf "%.0f" .BedTempTarget }}°</span>
+                    <div class="temp-item bed">
+                        <div class="temp-label">Bed</div>
+                        <div class="temp-value">
+                            <span class="temp-current">{{ printf "%.1f" .BedTemp }}°</span>
+                            <span class="temp-target">/ {{ printf "%.0f" .BedTempTarget }}°</span>
+                        </div>
                     </div>
-                </div>
 
-                <div class="temp-item ambient">
-                    <div class="temp-label">Ambient</div>
-                    <div class="temp-value">
-                        <span class="temp-current">{{ printf "%.1f" .AmbientTemp }}°</span>
+                    <div class="temp-item ambient">
+                        <div class="temp-label">Ambient</div>
+                        <div class="temp-value">
+                            <span class="temp-current">{{ printf "%.1f" .AmbientTemp }}°</span>
+                        </div>
                     </div>
-                </div>
-            </div>
 
-            <div class="time-info">
-                <div class="time-item">
-                    <span class="time-label">Elapsed:</span>
-                    <span class="time-value">{{ .FormatTimeElapsed }}</span>
-                </div>
-                <div class="time-item">
-                    <span class="time-label">Remaining:</span>
-                    <span class="time-value">{{ .FormatTimeRemaining }}</span>
+                    <div class="spacer"></div>
+
+                    <div class="time-item">
+                        <div class="time-label">Elapsed</div>
+                        <div class="time-value">{{ .FormatTimeElapsed }}</div>
+                    </div>
+                    <div class="time-item">
+                        <div class="time-label">Remaining</div>
+                        <div class="time-value">{{ .FormatTimeRemaining }}</div>
+                    </div>
                 </div>
             </div>
         </div>

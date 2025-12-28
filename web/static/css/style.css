@@ -14,28 +14,26 @@ body {
 .overlay-container {
     padding: 15px;
     width: 1744px;
-    max-height: 200px;
+    max-height: 300px;
 }
 
 .status-panel {
     background: rgba(0, 0, 0, 0.90);
     border-radius: 12px;
-    padding: 25px 35px;
+    padding: 30px 40px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     border: 2px solid rgba(255, 255, 255, 0.15);
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 25px;
     width: 100%;
-    min-height: 170px;
 }
 
-/* Print Info Section - Left Side */
-.print-info {
-    flex: 0 0 500px;
+/* Progress Section - Single Line */
+.progress-section {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
+    align-items: center;
+    gap: 25px;
 }
 
 .print-name {
@@ -46,74 +44,94 @@ body {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-}
-
-.progress-section {
-    display: flex;
-    align-items: center;
-    gap: 15px;
+    flex: 0 0 auto;
+    max-width: 400px;
 }
 
 .progress-bar-container {
     flex: 1;
-    height: 40px;
+    height: 50px;
     background: rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    overflow: hidden;
+    border-radius: 25px;
     border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.progress-bar {
-    height: 100%;
-    background: linear-gradient(90deg, #4CAF50, #8BC34A);
-    transition: width 0.5s ease;
-    box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .progress-text {
     font-size: 32px;
     font-weight: bold;
     color: #4CAF50;
+    white-space: nowrap;
+    flex: 0 0 auto;
     min-width: 100px;
     text-align: right;
 }
 
-.layer-info {
-    font-size: 22px;
-    color: #b0b0b0;
+.progress-bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #4CAF50, #8BC34A);
+    transition: width 0.5s ease;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+    border-radius: 25px;
 }
 
-/* Temperatures Section - Middle */
+.layer-info {
+    font-size: 20px;
+    color: #ffffff;
+    white-space: nowrap;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+    font-weight: 600;
+}
+
+/* Details Section - Below Progress */
+.details-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Temperatures Section - Center */
 .temps-container {
-    flex: 0 0 auto;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    padding: 20px 30px;
+    display: flex;
+    gap: 50px;
+    padding: 15px 35px;
     background: rgba(255, 255, 255, 0.08);
     border-radius: 8px;
+}
+
+.spacer {
+    flex: 1;
 }
 
 .temp-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
 }
 
 .temp-label {
-    font-size: 16px;
+    font-size: 14px;
     color: #b0b0b0;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
 .temp-value {
-    font-size: 30px;
+    font-size: 28px;
     font-weight: bold;
     display: flex;
     align-items: baseline;
     gap: 4px;
+    white-space: nowrap;
 }
 
 .temp-item.nozzle .temp-current {
@@ -130,35 +148,32 @@ body {
 
 .temp-target {
     color: #808080;
-    font-size: 20px;
+    font-size: 18px;
 }
 
-/* Time Info Section - Right Side */
+/* Time Info Section - Right */
 .time-info {
-    flex: 0 0 auto;
     display: flex;
-    gap: 40px;
-    justify-content: flex-end;
-    padding-left: 30px;
-    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    gap: 50px;
 }
 
 .time-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
 }
 
 .time-label {
-    font-size: 16px;
+    font-size: 14px;
     color: #b0b0b0;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
 .time-value {
-    font-size: 30px;
+    font-size: 28px;
     font-weight: bold;
     color: #ffffff;
+    white-space: nowrap;
 }

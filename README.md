@@ -100,7 +100,7 @@ The HTTP server will start on `http://localhost:8080` and automatically connect 
 2. Set the URL to: `http://localhost:8080/`
 3. Set dimensions:
    - Width: 1744
-   - Height: 200
+   - Height: 250
 4. Check "Shutdown source when not visible" to save resources
 5. Adjust position and scale as needed
 
