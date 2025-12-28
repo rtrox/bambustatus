@@ -1,9 +1,9 @@
-# Binaries
-bambustatus
-*.exe
-*.dll
-*.so
-*.dylib
+# Binaries (only in root)
+/bambustatus
+/*.exe
+/*.dll
+/*.so
+/*.dylib
 
 # Test files
 *.test
