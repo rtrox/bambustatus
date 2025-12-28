@@ -16,6 +16,7 @@ An OBS-ready HTML overlay generator for displaying Bambu Lab 3D printer status i
 - Auto-discovery of printer serial number
 - Clean, customizable overlay design
 - Transparent background for OBS
+- **RTSP stream compositor** - Overlay status onto video streams
 
 ## Project Structure
 
@@ -128,6 +129,63 @@ Edit [web/static/js/updater.js](web/static/js/updater.js) to change the refresh 
 ```javascript
 const REFRESH_INTERVAL = 2000; // milliseconds
 ```
+
+## RTSP Stream Compositor
+
+BambuStatus can overlay printer status onto an RTSP video stream (like a camera feed of your printer).
+
+### Docker Compose Setup
+
+1. Create or edit [docker-compose.streamer.yml](docker-compose.streamer.yml):
+
+```yaml
+services:
+  bambustatus-streamer:
+    build:
+      context: .
+      dockerfile: Dockerfile.streamer
+    ports:
+      - "8080:8080"  # Web interface
+      - "8554:8554"  # RTSP output
+    environment:
+      # Printer settings
+      PRINTER_HOST: "192.168.1.100"
+      PRINTER_PASSWORD: "12345678"
+
+      # Input RTSP stream
+      INPUT_RTSP: "rtsp://camera:554/stream"
+
+      # Overlay position (optional)
+      OVERLAY_X: "10"
+      OVERLAY_Y: "10"
+      CAPTURE_INTERVAL: "1"
+    restart: unless-stopped
+```
+
+2. Start the compositor:
+
+```bash
+docker-compose -f docker-compose.streamer.yml up -d
+```
+
+3. View the composited stream at `rtsp://localhost:8554/live`
+
+### Configuration Options
+
+- `PRINTER_HOST` - Printer IP address (required)
+- `PRINTER_PASSWORD` - Printer access code (required)
+- `INPUT_RTSP` - Source RTSP stream URL (required)
+- `OUTPUT_RTSP` - Output RTSP stream URL (default: `rtsp://0.0.0.0:8554/live`)
+- `OVERLAY_X` - Horizontal position in pixels (default: `10`)
+- `OVERLAY_Y` - Vertical position in pixels (default: `10`)
+- `CAPTURE_INTERVAL` - How often to update overlay in seconds (default: `1`)
+
+### How It Works
+
+1. **BambuStatus Server**: Runs the web server with real-time printer data
+2. **Overlay Capture**: Chromium headless captures the overlay as PNG every second
+3. **FFmpeg Compositor**: Composites the overlay onto the input RTSP stream
+4. **RTSP Output**: Serves the composited stream on port 8554
 
 ## Development
 

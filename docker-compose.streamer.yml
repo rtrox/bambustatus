@@ -1,0 +1,31 @@
+services:
+  bambustatus-streamer:
+    image: ghcr.io/rtrox/bambustatus-streamer:latest
+    # Uncomment to build locally instead:
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile.streamer
+    ports:
+      - "8080:8080"  # BambuStatus web interface
+      - "8554:8554"  # RTSP output stream
+    environment:
+      # Printer configuration (required)
+      PRINTER_HOST: "192.168.1.100"
+      PRINTER_PASSWORD: "12345678"
+      PRINTER_PORT: "8883"
+      PRINTER_USERNAME: "bblp"
+      PRINTER_SERIAL: ""  # Auto-discovered if empty
+
+      # RTSP input stream (required)
+      INPUT_RTSP: "rtsp://camera:554/stream"
+
+      # RTSP output stream (optional)
+      OUTPUT_RTSP: "rtsp://0.0.0.0:8554/live"
+
+      # Overlay settings (optional)
+      OVERLAY_URL: "http://localhost:8080"
+      OVERLAY_FILE: "/tmp/overlay/current.png"
+      OVERLAY_X: "10"           # X position (pixels from left)
+      OVERLAY_Y: "10"           # Y position (pixels from top)
+      CAPTURE_INTERVAL: "1"      # Overlay refresh rate (seconds)
+    restart: unless-stopped

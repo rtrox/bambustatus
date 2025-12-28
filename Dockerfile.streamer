@@ -1,0 +1,50 @@
+# Build stage for bambustatus
+FROM golang:1.25-alpine AS builder
+
+WORKDIR /app
+
+# Copy go mod files
+COPY go.mod go.sum ./
+RUN go mod download
+
+# Copy source code
+COPY . .
+
+# Build the application
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o bambustatus ./cmd/bambustatus
+
+# Final stage
+FROM alpine:latest
+
+# Install dependencies
+RUN apk --no-cache add \
+    ffmpeg \
+    chromium \
+    nss \
+    freetype \
+    harfbuzz \
+    ca-certificates \
+    ttf-freefont \
+    supervisor
+
+# Copy bambustatus binary and web assets
+COPY --from=builder /app/bambustatus /app/bambustatus
+COPY --from=builder /app/web /app/web
+
+WORKDIR /app
+
+# Create directories for overlay images
+RUN mkdir -p /tmp/overlay
+
+# Copy streaming scripts
+COPY scripts/stream.sh /app/stream.sh
+COPY scripts/capture-overlay.sh /app/capture-overlay.sh
+COPY scripts/supervisord.conf /etc/supervisord.conf
+
+RUN chmod +x /app/stream.sh /app/capture-overlay.sh
+
+# Expose ports
+EXPOSE 8080 8554
+
+# Use supervisord to run multiple processes
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
