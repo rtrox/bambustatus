@@ -10,6 +10,9 @@ RUN go mod download
 # Copy source code
 COPY . .
 
+# Debug: List what was copied
+RUN ls -la && ls -la cmd/ || echo "cmd/ not found"
+
 # Build the application
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o bambustatus ./cmd/bambustatus
 
