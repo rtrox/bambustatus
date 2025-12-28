@@ -17,8 +17,7 @@ vendor/
 # Go workspace file
 go.work
 
-# Build output
-bambustatus
+# Build output (only in root, not cmd/bambustatus/)
 /bambustatus
 
 # IDE
