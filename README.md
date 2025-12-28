@@ -52,6 +52,26 @@ bambustatus/
 
 ### Installation
 
+#### Option 1: Docker (Recommended)
+
+```bash
+docker pull ghcr.io/rtrox/bambustatus:latest
+
+docker run -p 8080:8080 \
+  ghcr.io/rtrox/bambustatus:latest \
+  -host <printer-ip> \
+  -password <access-code>
+```
+
+For RTSP stream compositor:
+```bash
+docker pull ghcr.io/rtrox/bambustatus-streamer:latest
+```
+
+See [RTSP Stream Compositor](#rtsp-stream-compositor) section for usage.
+
+#### Option 2: Build from Source
+
 1. Clone the repository:
 ```bash
 git clone https://github.com/rtrox/bambustatus.git

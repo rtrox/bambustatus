@@ -18,7 +18,7 @@ body {
 }
 
 .status-panel {
-    background: rgba(0, 0, 0, 0.90);
+    background: rgba(0, 0, 0, 0.70);
     border-radius: 12px;
     padding: 30px 40px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
@@ -102,7 +102,7 @@ body {
     display: flex;
     gap: 50px;
     padding: 15px 35px;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
     width: 100%;
 }

@@ -30,3 +30,6 @@ go.work
 # OS
 .DS_Store
 Thumbs.db
+
+# Local docker-compose files with secrets
+docker-compose.streamer.local.yml

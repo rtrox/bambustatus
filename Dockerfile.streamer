@@ -25,7 +25,8 @@ RUN apk --no-cache add \
     harfbuzz \
     ca-certificates \
     ttf-freefont \
-    supervisor
+    supervisor \
+    curl
 
 # Copy bambustatus binary and web assets
 COPY --from=builder /app/bambustatus /app/bambustatus

@@ -6,26 +6,26 @@ services:
     #   context: .
     #   dockerfile: Dockerfile.streamer
     ports:
-      - "8080:8080"  # BambuStatus web interface
-      - "8554:8554"  # RTSP output stream
+      - "8080:8080" # BambuStatus web interface
+      - "8554:8554" # RTSP output stream (not used when OUTPUT_RTMP is set)
     environment:
       # Printer configuration (required)
       PRINTER_HOST: "192.168.1.100"
-      PRINTER_PASSWORD: "12345678"
+      PRINTER_PASSWORD: "your-printer-password"
       PRINTER_PORT: "8883"
       PRINTER_USERNAME: "bblp"
-      PRINTER_SERIAL: ""  # Auto-discovered if empty
+      PRINTER_SERIAL: "" # Auto-discovered if empty
 
       # RTSP input stream (required)
-      INPUT_RTSP: "rtsp://camera:554/stream"
+      INPUT_RTSP: "rtsps://bblp:password@192.168.1.100:322/streaming/live/1"
 
-      # RTSP output stream (optional)
-      OUTPUT_RTSP: "rtsp://0.0.0.0:8554/live"
+      # RTMP output stream (optional)
+      OUTPUT_RTMP: "rtmp://your-rtmp-server.example.com/live/streamkey"
 
       # Overlay settings (optional)
       OVERLAY_URL: "http://localhost:8080"
       OVERLAY_FILE: "/tmp/overlay/current.png"
-      OVERLAY_X: "10"           # X position (pixels from left)
-      OVERLAY_Y: "10"           # Y position (pixels from top)
-      CAPTURE_INTERVAL: "1"      # Overlay refresh rate (seconds)
+      OVERLAY_X: "10" # X position (pixels from left)
+      OVERLAY_Y: "10" # Y position (pixels from top)
+      CAPTURE_INTERVAL: "1" # Overlay refresh rate (seconds)
     restart: unless-stopped
