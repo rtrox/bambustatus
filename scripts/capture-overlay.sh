@@ -11,6 +11,14 @@ echo "Saving to $OUTPUT_FILE every ${CAPTURE_INTERVAL}s"
 
 TEMP_FILE="${OUTPUT_FILE}-tmp.png"
 
+# Disable crash reporting via environment variable
+export CHROME_CRASHPAD_PIPE_NAME=
+export BREAKPAD_DUMP_LOCATION=/tmp
+
+# Create user data directory
+USER_DATA_DIR="/tmp/chromium-$(date +%s)"
+mkdir -p "$USER_DATA_DIR"
+
 while true; do
     chromium-browser \
         --headless=new \
@@ -30,14 +38,19 @@ while true; do
         --disable-hang-monitor \
         --disable-prompt-on-repost \
         --disable-breakpad \
+        --disable-crash-reporter \
+        --user-data-dir="$USER_DATA_DIR" \
         --virtual-time-budget=10000 \
         --window-size=1744,400 \
         --default-background-color=00000000 \
         --screenshot="$TEMP_FILE" \
-        "$OVERLAY_URL"
+        "$OVERLAY_URL" \
+        2>&1
 
     # Atomically replace the file so FFmpeg never sees a partial write
-    mv "$TEMP_FILE" "$OUTPUT_FILE"
+    if [ -f "$TEMP_FILE" ]; then
+        mv "$TEMP_FILE" "$OUTPUT_FILE"
+    fi
 
     sleep "$CAPTURE_INTERVAL"
 done
